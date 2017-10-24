@@ -23,6 +23,8 @@ public class ObservableCreateModel {
                 e.onNext(1);
                 e.onNext(2);
                 e.onNext(3);
+                e.onNext(4);
+                e.onNext(5);
             }
         });
     }
