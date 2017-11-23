@@ -23,6 +23,7 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public class BasicFragment extends BaseFragment implements View.OnClickListener{
     private BasicViewModel basicViewModel = null;
+    private FragmentBasicBinding basicViewBinding;
 
     public static BasicFragment newInstance(){
         BasicFragment basicFragment = new BasicFragment();
@@ -30,16 +31,21 @@ public class BasicFragment extends BaseFragment implements View.OnClickListener{
         basicFragment.setArguments(bundle);
         return basicFragment;
     }
+
+    @Override
+    protected void setListener() {
+        basicViewBinding.btnBasicCreate.setOnClickListener(this);
+        basicViewBinding.btnBasicJust.setOnClickListener(this);
+        basicViewBinding.btnBasicFrom.setOnClickListener(this);
+    }
+
     @Override
     protected void initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentBasicBinding basicViewBinding = (FragmentBasicBinding) viewDatabinding;
+        basicViewBinding = (FragmentBasicBinding) viewDatabinding;
         basicViewModel = new BasicViewModel(mActivity);
         basicViewBinding.basicToolbar.setTitle("基本使用");
         basicViewBinding.basicToolbar.setFitsSystemWindows(true);
         mActivity.setSupportActionBar(basicViewBinding.basicToolbar);
-        basicViewBinding.btnBasicCreate.setOnClickListener(this);
-        basicViewBinding.btnBasicJust.setOnClickListener(this);
-        basicViewBinding.btnBasicFrom.setOnClickListener(this);
         basicViewBinding.setData(basicViewModel);
     }
 

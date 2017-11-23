@@ -4,12 +4,6 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.util.Log;
 
-import com.hao.rxjava.BaseViewModel;
-import com.hao.rxjava.basic.ObservableCreateModel;
-import com.hao.rxjava.basic.ObserverCreateModel;
-
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -22,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * +-----------------------------------------------------
- * | @description:
+ * | @description:RxJava基本使用
  * +-----------------------------------------------------
  * | @author: hao
  * +-----------------------------------------------------
@@ -32,13 +26,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class BasicViewModel extends BaseViewModel {
 
-    private ObservableField<String> obStr = null;
-    private StringBuilder mBuilder;
-
     public BasicViewModel(Context context) {
         super(context);
-        obStr = new ObservableField<>();
-        mBuilder = new StringBuilder();
     }
 
     /**
@@ -56,6 +45,9 @@ public class BasicViewModel extends BaseViewModel {
                 .subscribe(createDisposableObserver());
     }
 
+    /**
+     * Just实现订阅
+     */
     public void onSubscribeJust(){
         if(mBuilder.length()>0){
             mBuilder.delete(0,obStr.get().length());
@@ -73,19 +65,10 @@ public class BasicViewModel extends BaseViewModel {
         if(mBuilder.length()>0){
             mBuilder.delete(0,obStr.get().length());
         }
-        mBuilder.append("Form实现：\n");
+        mBuilder.append("From实现：\n");
         createObservableFrom().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(createDisposableObserver());
-    }
-
-
-    public ObservableField<String> getObStr() {
-        return obStr;
-    }
-
-    public void setObStr(ObservableField<String> obStr) {
-        this.obStr = obStr;
     }
 
 // ################################################################################################
@@ -154,7 +137,7 @@ public class BasicViewModel extends BaseViewModel {
 
             @Override
             public void onComplete() {
-                mBuilder.append("Subscriber::::::(onComplete\n");
+                mBuilder.append("Subscriber::::::(onComplete)\n");
                 obStr.set(mBuilder.toString());
                 Log.i("Subscriber","onComplete");
             }
@@ -196,7 +179,7 @@ public class BasicViewModel extends BaseViewModel {
      * 参数为数组形式，可传大于十位参数
      */
     private Observable<String> createObservableFrom(){
-        String[] str = {"from1","from1","from1","from1","from1"};
+        String[] str = {"from1","from2","from3","from4","from5"};
         return Observable.fromArray(str);
     }
 

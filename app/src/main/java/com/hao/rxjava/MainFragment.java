@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hao.rxjava.databinding.FragmentMainBinding;
+import com.hao.rxjava.operators.CreatingFragment;
 
 /**
  * +-----------------------------------------------------
@@ -49,6 +50,9 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.btn_basic_apply:
                 start(BasicFragment.newInstance());
+                break;
+            case R.id.btn_creating_operators:
+                start(new CreatingFragment());
                 break;
             default:
                 break;

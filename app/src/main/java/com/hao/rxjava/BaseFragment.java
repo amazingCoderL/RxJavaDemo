@@ -25,10 +25,9 @@ import me.yokeyword.fragmentation.SupportHelper;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
- * 懒加载
- * Created by YoKeyword on 16/6/5.
+ *
  */
-public abstract class BaseFragment extends Fragment implements ISupportFragment {
+public abstract class BaseFragment extends Fragment implements ISupportFragment,View.OnClickListener {
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected AppCompatActivity mActivity;
     protected ViewDataBinding viewDatabinding;
@@ -47,8 +46,11 @@ public abstract class BaseFragment extends Fragment implements ISupportFragment 
         }
         viewDatabinding = DataBindingUtil.inflate(inflater,setViewId(),container,false);
         initView(inflater,container,savedInstanceState);
+        setListener();
         return viewDatabinding.getRoot();
     }
+
+    protected abstract void setListener();
 
     // 初始化控件
     protected abstract void initView(LayoutInflater inflater, @Nullable ViewGroup container,
